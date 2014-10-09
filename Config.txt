@@ -1,0 +1,4 @@
+DRIVER = com.mysql.jdbc.Driver
+URL = jdbc:mysql://localhost/employees
+USERNAME = write_here_your_user_name
+PASSWORD = write_here_your_password
