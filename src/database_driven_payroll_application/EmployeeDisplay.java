@@ -543,32 +543,32 @@ public class EmployeeDisplay extends JFrame
       } // end catch
    } // end method browseButtonActionPerformed
 
-	private void modInsertion()
-	{
-		insertButton.setText("Add new query");
-		socialSecurityNumberTextField.setText(""  );
+   private void modInsertion()
+   {
+	insertButton.setText("Add new query");
+	socialSecurityNumberTextField.setText(""  );
         firstNameTextField.setText("" );
         lastNameTextField.setText(""  );
         birthdayTextField.setText(""  );
-		comboBoxEmployeeType.setSelectedIndex(0);
+	comboBoxEmployeeType.setSelectedIndex(0);
         departmentNameTextField.setText("" );
-		indexTextField.setText("");
+	indexTextField.setText("");
         nextButton.setEnabled( false );
         previousButton.setEnabled( false );
-		updateButton.setEnabled(false);
-		queryButton.setEnabled(false);
+	updateButton.setEnabled(false);
+	queryButton.setEnabled(false);
       	socialSecurityNumberTextField.setEditable( true );
-	}
+   }
 
-	private void modView()
-	{
-		insertButton.setText("Insert New Entry");
+   private void modView()
+   {
+	insertButton.setText("Insert New Entry");
         nextButton.setEnabled( true );
         previousButton.setEnabled( true );
-		updateButton.setEnabled(true);
-		queryButton.setEnabled(true);
+	updateButton.setEnabled(true);
+	queryButton.setEnabled(true);
       	socialSecurityNumberTextField.setEditable( false );
-	}
+   }
 
 
 
@@ -576,60 +576,60 @@ public class EmployeeDisplay extends JFrame
    private void insertButtonActionPerformed( ActionEvent evt ) 
    {
 
-	   if((insertButton.getText()).equals("Insert New Entry"))
-		   modInsertion();
-	   else
+	if((insertButton.getText()).equals("Insert New Entry"))
+	   modInsertion();
+	else
+	{
+	   if((socialSecurityNumberTextField.getText()).length() != 0)
 	   {
-		   if((socialSecurityNumberTextField.getText()).length() != 0)
+
+		   results = employeeQueries.getEmployeeBySocialSecurity( socialSecurityNumberTextField.getText() );
+		   numberOfEntries = results.size();
+
+		   if(numberOfEntries == 0)
 		   {
 
-			   results = employeeQueries.getEmployeeBySocialSecurity( socialSecurityNumberTextField.getText() );
-			   numberOfEntries = results.size();
-
-			   if(numberOfEntries == 0)
+			   String fechaLeida = yyyyTextField.getText();
+			   boolean cumplePatron = Pattern.matches("\\d\\d\\d\\d-\\d\\d-\\d\\d", fechaLeida);
+			   if(!cumplePatron)
 			   {
+				   JOptionPane.showMessageDialog( this, "Wrong brirthday!", "Error", JOptionPane.PLAIN_MESSAGE );
+			   }
+			   else
+			   {
+				   try
+				   {
+					   java.sql.Date sqlDate;
+					   sqlDate = Date.valueOf(fechaLeida);
 
-				   String fechaLeida = yyyyTextField.getText();
-				   boolean cumplePatron = Pattern.matches("\\d\\d\\d\\d-\\d\\d-\\d\\d", fechaLeida);
-				   if(!cumplePatron)
-				   {
-					   JOptionPane.showMessageDialog( this, "Wrong brirthday!", "Error", JOptionPane.PLAIN_MESSAGE );
-				   }
-				   else
-				   {
-					   try
+					   int result = employeeQueries.addEmployee( socialSecurityNumberTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), sqlDate, employeeSelected, departmentNameTextField.getText()   );
+
+					   currentEmployee = employeeSelected;
+
+					   if ( result == 1 )
 					   {
-						   java.sql.Date sqlDate;
-						   sqlDate = Date.valueOf(fechaLeida);
+						   JOptionPane.showMessageDialog( this, "Employee added!", "Employee added", JOptionPane.PLAIN_MESSAGE );
 
-						   int result = employeeQueries.addEmployee( socialSecurityNumberTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), sqlDate, employeeSelected, departmentNameTextField.getText()   );
-
-						   currentEmployee = employeeSelected;
-
-						   if ( result == 1 )
-						   {
-							   JOptionPane.showMessageDialog( this, "Employee added!", "Employee added", JOptionPane.PLAIN_MESSAGE );
-
-							   if((employeeSelected).equals("salariedEmployee"))
-								   salariedEmployee.addSalariedEmployee(socialSecurityNumberTextField.getText(), 0.0, 0.0);	
-							   else if((employeeSelected).equals("commissionEmployee"))			
-								   commissionEmployee.addCommissionEmployee(socialSecurityNumberTextField.getText(), 0.0, 0, 0.0);
-							   else if((employeeSelected).equals("hourlyEmployee"))	
-								   hourlyEmployee.addHourlyEmployee(socialSecurityNumberTextField.getText(), 0, 0.0, 0.0);
-							   else if((employeeSelected).equals("basePlusCommissionEmployee"))	
-								   basePlusCommissionEmployee.addBasePlusCommissionEmployee(socialSecurityNumberTextField.getText(), 0.0, 0, 0.0, 0.0);
+						   if((employeeSelected).equals("salariedEmployee"))
+							   salariedEmployee.addSalariedEmployee(socialSecurityNumberTextField.getText(), 0.0, 0.0);	
+						   else if((employeeSelected).equals("commissionEmployee"))			
+							   commissionEmployee.addCommissionEmployee(socialSecurityNumberTextField.getText(), 0.0, 0, 0.0);
+						   else if((employeeSelected).equals("hourlyEmployee"))	
+							   hourlyEmployee.addHourlyEmployee(socialSecurityNumberTextField.getText(), 0, 0.0, 0.0);
+						   else if((employeeSelected).equals("basePlusCommissionEmployee"))	
+							   basePlusCommissionEmployee.addBasePlusCommissionEmployee(socialSecurityNumberTextField.getText(), 0.0, 0, 0.0, 0.0);
 						
-						   	}
-      						else
-         						JOptionPane.showMessageDialog( this, "Employee not added!", "Error", JOptionPane.PLAIN_MESSAGE );
+				   	   }
+				   	   else
+         					JOptionPane.showMessageDialog( this, "Employee not added!", "Error", JOptionPane.PLAIN_MESSAGE );
 
-      						browseButtonActionPerformed( evt );
-					}
-					catch(IllegalArgumentException ex)
-					{
-						JOptionPane.showMessageDialog( this, "Wrong birthday!", "Error", JOptionPane.PLAIN_MESSAGE );
-					}
-				}
+      					browseButtonActionPerformed( evt );
+				   }
+				   catch(IllegalArgumentException ex)
+				   {
+					JOptionPane.showMessageDialog( this, "Wrong birthday!", "Error", JOptionPane.PLAIN_MESSAGE );
+				   }
+			     }
 			}
 			else JOptionPane.showMessageDialog( this, "Social Security already exist!", "Error", JOptionPane.PLAIN_MESSAGE );
 		}
