@@ -56,13 +56,13 @@ public class SalariedEmployeeDisplay extends JFrame
 	private NumberFormat bonusFormat;
 
 
-   // no-argument constructor
+   	// no-argument constructor
    	public SalariedEmployeeDisplay(ConnectDB connect)
    	{
       		super( "Salaried Employee" ); 
       		salariedEmployeeQueries = new SalariedEmployeeQueries(connect);
 
-			initTextFields();
+		initTextFields();
 
       		setLayout( new FlowLayout( FlowLayout.CENTER, 10, 10 ) );
       		setSize( 500, 600 );
@@ -78,17 +78,17 @@ public class SalariedEmployeeDisplay extends JFrame
       	   	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       	   	browseButtonActionPerformed();
 
-   } // end
+   	} // end
    	
    	private void  initTextFields(){
 
 		salaryTextField = new JFormattedTextField(salaryFormat);
 		salaryTextField.setValue(new Double(amount));
-        salaryTextField.setColumns(10);
+        	salaryTextField.setColumns(10);
 
 		bonusTextField = new JFormattedTextField(bonusFormat);
 		bonusTextField.setValue(new Double(amount));
-        bonusTextField.setColumns(10);
+        	bonusTextField.setColumns(10);
    	}
    	
    	private void addUpdateOptionToPanel(){
@@ -155,7 +155,7 @@ public class SalariedEmployeeDisplay extends JFrame
   		add( queryPanel );
    	}
 
-private void addFieldsToPanel(){
+	private void addFieldsToPanel(){
 
 		displayPanel.setLayout( new GridLayout( 4, 2, 4, 4 ) );
 
@@ -174,9 +174,9 @@ private void addFieldsToPanel(){
 		displayPanel.add( bonusTextField );
 
 		add( displayPanel );
-}
+	}
 
-private void addNavegationToPanel(){
+	private void addNavegationToPanel(){
 
 		navigatePanel.setLayout(
  		new BoxLayout( navigatePanel, BoxLayout.X_AXIS ) );
@@ -243,8 +243,8 @@ private void addNavegationToPanel(){
 
    private void updateButtonActionPerformed( ActionEvent evt ) 
    {
-		int result = salariedEmployeeQueries.updateSalariedEmployee( socialSecurityNumberTextField.getText(),  Double.parseDouble(salaryTextField.getText()), Double.parseDouble(bonusTextField.getText()) );
-//bonusTextField.getValue()
+	int result = salariedEmployeeQueries.updateSalariedEmployee( socialSecurityNumberTextField.getText(),  Double.parseDouble(salaryTextField.getText()), Double.parseDouble(bonusTextField.getText()) );
+	//bonusTextField.getValue()
 
       	if ( result == 1 )
        			JOptionPane.showMessageDialog( this, "SalariedEmployee updated!", "Employee updated", JOptionPane.PLAIN_MESSAGE );
@@ -343,12 +343,12 @@ private void addNavegationToPanel(){
 
 
 
-   	private void browseButtonActionPerformed(  )
-	{
+   private void browseButtonActionPerformed(  )
+   {
       	try
       	{
       		modView();
-			salariedResults = salariedEmployeeQueries.getAllSalariedEmployees();
+		salariedResults = salariedEmployeeQueries.getAllSalariedEmployees();
          	numberOfEntries = salariedResults.size();
 
          	if ( numberOfEntries != 0 )
@@ -369,54 +369,54 @@ private void addNavegationToPanel(){
       	{
        		e.printStackTrace();
       	} // end catch
-	}
+   }
 
 
 
    	// handles call when browseButton is clicked
-   	private void browseButtonActionPerformed( ActionEvent evt )
-   	{
+   private void browseButtonActionPerformed( ActionEvent evt )
+   {
 
       	try
       	{
-	  		modView();
-			salariedResults = salariedEmployeeQueries.getAllSalariedEmployees();
-         		numberOfEntries = salariedResults.size();
+	 	modView();
+		salariedResults = salariedEmployeeQueries.getAllSalariedEmployees();
+         	numberOfEntries = salariedResults.size();
   
-         		if ( numberOfEntries != 0 )
-         		{
-            			currentEntry = salariedResults.get( currentEntryIndex );
-            			socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
-            			salaryTextField.setValue(currentEntry.getWeeklySalary());
-            			bonusTextField.setValue(currentEntry.getBonus());
-         		} // end if
+         	if ( numberOfEntries != 0 )
+         	{
+            		currentEntry = salariedResults.get( currentEntryIndex );
+            		socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
+            		salaryTextField.setValue(currentEntry.getWeeklySalary());
+            		bonusTextField.setValue(currentEntry.getBonus());
+         	} // end if
 
-      		} // end try
-      		catch ( Exception e )
-      		{
-         		e.printStackTrace();
-      		} // end catch
-   	} // end method browseButtonActionPerformed
+      	} // end try
+      	catch ( Exception e )
+      	{
+        	e.printStackTrace();
+      	} // end catch
+   } // end method browseButtonActionPerformed
 
-	private void modInsertion()
-	{
-		socialSecurityNumberTextField.setText(""  );
-		indexTextField.setText("");
+   private void modInsertion()
+   {
+	socialSecurityNumberTextField.setText(""  );
+	indexTextField.setText("");
         nextButton.setEnabled( false );
         previousButton.setEnabled( false );
-		updateButton.setEnabled(false);
-		queryButton.setEnabled(false);
+	updateButton.setEnabled(false);
+	queryButton.setEnabled(false);
       	socialSecurityNumberTextField.setEditable( true );
-	}
+   }
 
 
-	private void modView()
-	{
+   private void modView()
+   {
         nextButton.setEnabled( true );
         previousButton.setEnabled( true );
         updateButton.setEnabled(true);
         queryButton.setEnabled(true);
       	socialSecurityNumberTextField.setEditable( false );
-	}
+   }
 
 } // end class 
