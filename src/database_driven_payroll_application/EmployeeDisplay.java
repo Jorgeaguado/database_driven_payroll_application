@@ -297,19 +297,19 @@ public class EmployeeDisplay extends JFrame
 
    private void updateButtonActionPerformed( ActionEvent evt ) 
    {
-		updateEmployeeType(socialSecurityNumberTextField.getText());
+	updateEmployeeType(socialSecurityNumberTextField.getText());
 
-		String fechaLeida = yyyyTextField.getText();
-		boolean cumplePatron = Pattern.matches("\\d\\d\\d\\d-\\d\\d-\\d\\d", fechaLeida);
-		if(!cumplePatron)
-		{
-			JOptionPane.showMessageDialog( this, "Wrong brirthday!", "Error", JOptionPane.PLAIN_MESSAGE );
+	String fechaLeida = yyyyTextField.getText();
+	boolean cumplePatron = Pattern.matches("\\d\\d\\d\\d-\\d\\d-\\d\\d", fechaLeida);
+	if(!cumplePatron)
+	{
+		JOptionPane.showMessageDialog( this, "Wrong brirthday!", "Error", JOptionPane.PLAIN_MESSAGE );
 
-		}
-		else
+	}
+	else
+	{
+		try
 		{
-			try
-			{
     			java.sql.Date sqlDate;
 				sqlDate = Date.valueOf(fechaLeida);
       			int result = employeeQueries.updateEmployee( socialSecurityNumberTextField.getText(), firstNameTextField.getText(), lastNameTextField.getText(), sqlDate , employeeSelected, departmentNameTextField.getText()   );
@@ -321,14 +321,14 @@ public class EmployeeDisplay extends JFrame
          			JOptionPane.showMessageDialog( this, "Employee not updated!", "Error", JOptionPane.PLAIN_MESSAGE );
           
       			browseButtonActionPerformed( evt );
-			}catch(IllegalArgumentException ex)
-			{
-				JOptionPane.showMessageDialog( this, "Wrong birthday!", "Error", JOptionPane.PLAIN_MESSAGE );
-			}
-			catch (Exception ex) {
-         		JOptionPane.showMessageDialog( this, "Employee not updated!", "Error", JOptionPane.PLAIN_MESSAGE );
-			}
+		}catch(IllegalArgumentException ex)
+		{
+			JOptionPane.showMessageDialog( this, "Wrong birthday!", "Error", JOptionPane.PLAIN_MESSAGE );
 		}
+		catch (Exception ex) {
+         		JOptionPane.showMessageDialog( this, "Employee not updated!", "Error", JOptionPane.PLAIN_MESSAGE );
+		}
+	}
    } // end method insertButtonActionPerformed
 
 
