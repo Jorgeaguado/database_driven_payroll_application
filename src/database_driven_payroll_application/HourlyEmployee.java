@@ -11,7 +11,7 @@ public class HourlyEmployee
    	public HourlyEmployee( String socialSecurityN, int h, double w, double b )
    	{
 
-	    setSocialSecurityNumber( socialSecurityN );
+	    	setSocialSecurityNumber( socialSecurityN );
 		setHours(h);
 		setWage(w);
 		setBonus(b);
