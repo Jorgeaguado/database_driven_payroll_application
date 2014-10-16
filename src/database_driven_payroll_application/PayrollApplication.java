@@ -57,17 +57,16 @@ public class PayrollApplication extends JFrame {
 	private int indexQuery = 0;
 	private final ConnectDB connectDB;
    
-   // create ResultSetTableModel and GUI
+   // PayrollApplication constructor
    public PayrollApplication(ConnectDB connect) 
    {   
       super( "Displaying Generic Employees" );
 	connectDB = connect;
-      // create ResultSetTableModel and display database table
       try 
       {
 	
 		connection = connectDB.getConnection();
-         	// create TableModel for results of query SELECT * FROM authors
+
          	tableModel = new ResultSetTableModel( connectDB.getDriver(), connectDB.getDatabaseDriver(), connectDB.getUserName(), connectDB.getPassword(), DEFAULT_QUERY );
 
 		increaseBaseSalary10 = connection.prepareStatement( querySql[4] );
