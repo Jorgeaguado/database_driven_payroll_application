@@ -90,7 +90,8 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 
    } // end no-argument constructor
    
-   private void initTextFields(){
+   private void initTextFields()
+   {
 
 	   grossSalesTextField = new JFormattedTextField(grossSalesFormat);
 	   grossSalesTextField.setValue(new Double(amount));
@@ -109,23 +110,25 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 	   bonusTextField.setColumns(10);
    }
    
-   private void addUpdateOptionToPanel(){
+   private void addUpdateOptionToPanel()
+   {
 
 	   updateButton.setText( "Update Entry" );
 	   updateButton.addActionListener(
-       new ActionListener()
-       {
-    	   public void actionPerformed( ActionEvent evt )
+       	   new ActionListener()
            {
+    	   	public void actionPerformed( ActionEvent evt )
+           	{
     		   updateButtonActionPerformed( evt );
            	} // end method actionPerformed
-        } // end anonymous inner class
-     	); // end call to addActionListener
+           } // end anonymous inner class
+     	   ); // end call to addActionListener
 
      	add( updateButton );
    }
    
-   private void addBrowsOptionToPanel(){
+   private void addBrowsOptionToPanel()
+   {
 
      	browseButton.setText( "Browse All Entries" );
 
@@ -142,7 +145,8 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
      	add( browseButton );
    }
    
-   private void addFindOptionToPanel(){
+   private void addFindOptionToPanel()
+   {
 
      	queryPanel.setLayout(new BoxLayout( queryPanel, BoxLayout.X_AXIS) );
 
@@ -172,7 +176,8 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
      	add( queryPanel );
    }
    
-   private void addFieldsToPanel(){
+   private void addFieldsToPanel()
+   {
 
      	displayPanel.setLayout( new GridLayout( 5, 2, 4, 4 ) );
 
@@ -201,7 +206,8 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
      	add( displayPanel );
    }
 
-   	private void addNavegationToPanel(){
+   private void addNavegationToPanel()
+   {
 
       	navigatePanel.setLayout(new BoxLayout( navigatePanel, BoxLayout.X_AXIS ) );
 
@@ -263,27 +269,27 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 
       	navigatePanel.add( nextButton );
       	add( navigatePanel );
-   	}
+   }
 
-   	private void updateButtonActionPerformed( ActionEvent evt ) 
-   	{
+   private void updateButtonActionPerformed( ActionEvent evt ) 
+   {
 
-		int result = basePlusCommissionEmployeeQueries.updateBasePlusCommissionEmployee( socialSecurityNumberTextField.getText(),  Double.parseDouble(grossSalesTextField.getText()), Integer.parseInt(commissionRateTextField.getText()), Double.parseDouble(baseSalaryTextField.getText()), Double.parseDouble(bonusTextField.getText()) );
-      	if ( result == 1 )
-       		JOptionPane.showMessageDialog( this, "BasePlusCommissionEmployee updated!", "Employee updated", JOptionPane.PLAIN_MESSAGE );
-   		else
+	int result = basePlusCommissionEmployeeQueries.updateBasePlusCommissionEmployee( socialSecurityNumberTextField.getText(),  Double.parseDouble(grossSalesTextField.getText()), Integer.parseInt(commissionRateTextField.getText()), Double.parseDouble(baseSalaryTextField.getText()), Double.parseDouble(bonusTextField.getText()) );
+	if ( result == 1 )
+		JOptionPane.showMessageDialog( this, "BasePlusCommissionEmployee updated!", "Employee updated", JOptionPane.PLAIN_MESSAGE );
+	else
       		JOptionPane.showMessageDialog( this, "BasePlusCommissionEmployee not updated!", "Error", JOptionPane.PLAIN_MESSAGE );
           
       	browseButtonActionPerformed( evt );
 
-   	} // end method insertButtonActionPerformed
+   } // end method updateButtonActionPerformed
 
 
 
 
-   	// handles call when previousButton is clicked
-   	private void previousButtonActionPerformed( ActionEvent evt )
-   	{
+   // handles call when previousButton is clicked
+   private void previousButtonActionPerformed( ActionEvent evt )
+   {
       	currentEntryIndex--;
       
       	if ( currentEntryIndex < 0 )
@@ -292,11 +298,11 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
   		indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
       	indexTextFieldActionPerformed( evt );  
 
-   	} // end method previousButtonActionPerformed
+   } // end method previousButtonActionPerformed
 
-   	// handles call when nextButton is clicked
-   	private void nextButtonActionPerformed( ActionEvent evt ) 
-   	{
+   // handles call when nextButton is clicked
+   private void nextButtonActionPerformed( ActionEvent evt ) 
+   {
       	currentEntryIndex++;
       
       	if ( currentEntryIndex >= numberOfEntries )
@@ -304,14 +310,14 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
       
       	indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
       	indexTextFieldActionPerformed( evt );
-   	} // end method nextButtonActionPerformed
+   } // end method nextButtonActionPerformed
 
 
-   	// handles call when queryButton is clicked
-   	private void queryButtonActionPerformed( ActionEvent evt )
-   	{
+   // handles call when queryButton is clicked
+   private void queryButtonActionPerformed( ActionEvent evt )
+   {
 
-		boolean found = false;
+	boolean found = false;
         int auxEntryIndex = 0;
 	
       	numberOfEntries = results.size();
@@ -324,13 +330,13 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 	
 				currentEntryIndex = auxEntryIndex;
 				found = false;
-       			socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
+       				socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
 				grossSalesTextField.setValue(currentEntry.getGrossSales());
 				commissionRateTextField.setValue(currentEntry.getCommissionRate());
 				baseSalaryTextField.setValue(currentEntry.getBaseSalary());
 				bonusTextField.setValue(currentEntry.getBonus());
 				
-       		  	indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
+       			  	indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
 				break;
 			}
 		}
@@ -339,11 +345,11 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 
 		browseButtonActionPerformed( evt );
 
-   	} // end method queryButtonActionPerformed
+   } // end method queryButtonActionPerformed
 
    	// handles call when a new value is entered in indextTextField
-   	private void indexTextFieldActionPerformed( ActionEvent evt )
-	{
+   private void indexTextFieldActionPerformed( ActionEvent evt )
+   {
 
       	currentEntryIndex = ( Integer.parseInt( indexTextField.getText() ) - 1 );
       
@@ -351,10 +357,10 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
       	{
         	currentEntry = results.get( currentEntryIndex );
        		socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
-			grossSalesTextField.setValue(currentEntry.getGrossSales());
-			commissionRateTextField.setValue(currentEntry.getCommissionRate());
-			baseSalaryTextField.setValue(currentEntry.getBaseSalary());
-			bonusTextField.setValue(currentEntry.getBonus());
+		grossSalesTextField.setValue(currentEntry.getGrossSales());
+		commissionRateTextField.setValue(currentEntry.getCommissionRate());
+		baseSalaryTextField.setValue(currentEntry.getBaseSalary());
+		bonusTextField.setValue(currentEntry.getBonus());
         	maxTextField.setText( "" + numberOfEntries );
         	indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
 
@@ -364,12 +370,12 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 
 
 
-   	private void browseButtonActionPerformed( )
-   	{
+   private void browseButtonActionPerformed( )
+   {
       	try
       	{
-	  		modView();
-			results = basePlusCommissionEmployeeQueries.getAllBasePlusCommissionEmployees();
+  		modView();
+		results = basePlusCommissionEmployeeQueries.getAllBasePlusCommissionEmployees();
         	numberOfEntries = results.size();
   
          	if ( numberOfEntries != 0 )
@@ -377,10 +383,10 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
            		currentEntry = results.get( currentEntryIndex );
 
        			socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
-				grossSalesTextField.setValue(currentEntry.getGrossSales());
-				commissionRateTextField.setValue(currentEntry.getCommissionRate());
-				baseSalaryTextField.setValue(currentEntry.getBaseSalary());
-				bonusTextField.setValue(currentEntry.getBonus());
+			grossSalesTextField.setValue(currentEntry.getGrossSales());
+			commissionRateTextField.setValue(currentEntry.getCommissionRate());
+			baseSalaryTextField.setValue(currentEntry.getBaseSalary());
+			bonusTextField.setValue(currentEntry.getBonus());
 
            		maxTextField.setText( "" + numberOfEntries );
            		indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
@@ -390,15 +396,15 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 
       	} // end try
       	catch ( Exception e )
-  		{
+  	{
        		e.printStackTrace();
    		} // end catch
-	}
+    }
 
 
    	// handles call when browseButton is clicked
-   	private void browseButtonActionPerformed( ActionEvent evt )
-   	{
+   private void browseButtonActionPerformed( ActionEvent evt )
+   {
       	try
       	{
       		modView();
@@ -408,17 +414,17 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
 
          	if ( numberOfEntries != 0 )
          	{
-            	currentEntry = results.get( currentEntryIndex );
+            		currentEntry = results.get( currentEntryIndex );
 
        			socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
-				grossSalesTextField.setValue(currentEntry.getGrossSales());
-				commissionRateTextField.setValue(currentEntry.getCommissionRate());
-				baseSalaryTextField.setValue(currentEntry.getBaseSalary());
-				bonusTextField.setValue(currentEntry.getBonus());
+			grossSalesTextField.setValue(currentEntry.getGrossSales());
+			commissionRateTextField.setValue(currentEntry.getCommissionRate());
+			baseSalaryTextField.setValue(currentEntry.getBaseSalary());
+			bonusTextField.setValue(currentEntry.getBonus());
            		maxTextField.setText( "" + numberOfEntries );
-            	indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
-            	nextButton.setEnabled( true );
-            	previousButton.setEnabled( true );
+            		indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
+            		nextButton.setEnabled( true );
+            		previousButton.setEnabled( true );
          	} // end if
 
       	} // end try
@@ -427,31 +433,31 @@ public class BasePlusCommissionEmployeeDisplay extends JFrame
          	e.printStackTrace();
       	} // end catch
 
-   	} // end method browseButtonActionPerformed
+   } // end method browseButtonActionPerformed
 
 
 
-	private void modInsertion()
-	{
+   private void modInsertion()
+   {
 
-		socialSecurityNumberTextField.setText(""  );
-		indexTextField.setText("");
+	socialSecurityNumberTextField.setText(""  );
+	indexTextField.setText("");
         nextButton.setEnabled( false );
         previousButton.setEnabled( false );
-		updateButton.setEnabled(false);
-		queryButton.setEnabled(false);
+	updateButton.setEnabled(false);
+	queryButton.setEnabled(false);
       	socialSecurityNumberTextField.setEditable( true );
-	}
+   }
 
 
-	private void modView()
-	{
-		nextButton.setEnabled( true );
-        previousButton.setEnabled( true );
-        updateButton.setEnabled(true);
-        queryButton.setEnabled(true);
-      	socialSecurityNumberTextField.setEditable( false );
-	}
+   private void modView()
+   {
+	nextButton.setEnabled( true );
+       	previousButton.setEnabled( true );
+       	updateButton.setEnabled(true);
+       	queryButton.setEnabled(true);
+       	socialSecurityNumberTextField.setEditable( false );
+   }
 
 
 } // end class 
