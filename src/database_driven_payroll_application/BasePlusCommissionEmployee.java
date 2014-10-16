@@ -17,18 +17,18 @@ public class BasePlusCommissionEmployee
       	setBaseSalary(baseS);
       	setBonus(bon);
 
-   } // end five-argument Person constructor 
+   } // end five-argument BasePlusCommissionEmployee
 
    public void setSocialSecurityNumber( String socialSecurityN )
    {
 	   socialSecurityNumber = socialSecurityN;
-   } // end method setAddressID
+   } // end method setSocialSecurityNumber
 
 
    public void setGrossSale( double grossS )
    {
 	   grossSale = grossS;
-   } // end method setAddressID
+   } // end method setGrossSale
 
    public void setCommissionRate( int commission )
    {
@@ -38,45 +38,45 @@ public class BasePlusCommissionEmployee
    public void setBaseSalary( double salary )
    {
 	   baseSalary = salary;
-   } // end method setAddressID
+   } // end method setCommissionRate
 
   public void setBonus( double bon )
    {
       bonus = bon;
-   } // end method setAd
+   } // end method setBonus
 
 
 
    public String getSocialSecurityNumber( )
    {
 	   return socialSecurityNumber;
-   } // end method setAddressID
+   } // end method getSocialSecurityNumber
 
 
    public double getBaseSalary( )
    {
 	   return baseSalary;
-   } // end method setAddressID
+   } // end method getBaseSalary
 
 
 
    public int getCommissionRate( )
    {
 	   return commissionRate;
-   } // end method setAddressID
+   } // end method getCommissionRate
 
 
    public double getGrossSales( )
    {
 	   return grossSale;
-   } // end method setAddressID
+   } // end method getGrossSales
 
 
 
    public double getBonus( )
    {
 	   return bonus;
-   } // end method setAddressID
+   } // end method getBonus
 
 
 } // end class 
