@@ -21,45 +21,45 @@ public class BasePlusCommissionEmployeeQueries
    public BasePlusCommissionEmployeeQueries(ConnectDB connect)
    {
 	   
-	  connection = connect.getConnection();
+      connection = connect.getConnection();
       try 
       {
         // create query that selects all entries in the AddressBook
-        selectAllBasePlusCommissionEmployees = 
+            selectAllBasePlusCommissionEmployees = 
             connection.prepareStatement( "SELECT * FROM basePlusCommissionEmployees" );
          
-		selectEmployeeBySS  = 
+	    selectEmployeeBySS  = 
             connection.prepareStatement( "SELECT * FROM basePlusCommissionEmployees WHERE socialSecurityNumber = ?" );
          	// create insert that adds a new entry into the database
-        insertNewBasePlusCommissionEmployee = connection.prepareStatement( 
+            insertNewBasePlusCommissionEmployee = connection.prepareStatement( 
        		"INSERT INTO basePlusCommissionEmployees " + 
             "( socialSecurityNumber, grossSales, commissionRate, baseSalary, bonus   ) " + 
            	"VALUES ( ?, ?, ?, ?, ? )" );
 
-		updateBasePlusCommissionEmployee =  connection.prepareStatement( 
+	    updateBasePlusCommissionEmployee =  connection.prepareStatement( 
             "UPDATE basePlusCommissionEmployees " + 
            	"set  grossSales = ?,"+ " commissionRate = ?, "+" baseSalary = ?,"+" bonus = ? "+" WHERE socialSecurityNumber = ?" );
 
-		deleteBasePlusCommissionEmployee = connection.prepareStatement( 
+	    deleteBasePlusCommissionEmployee = connection.prepareStatement( 
       		"DELETE FROM basePlusCommissionEmployees WHERE socialSecurityNumber = ?" );
       } // end try
       catch ( SQLException sqlException )
       {
-       	sqlException.printStackTrace();
-       	System.exit( 1 );
+       	  sqlException.printStackTrace();
+       	  System.exit( 1 );
       } // end catch
       
 
    } // end 
  
 
-	public int deleteBasePlusCommissionEmployee(String ss)
-	{
+   public int deleteBasePlusCommissionEmployee(String ss)
+   {
      	int result = 0;
 
       	// set parameters, then execute insertNewPerson
-   		try 
-  		{
+   	try 
+  	{
          		deleteBasePlusCommissionEmployee.setString( 1, ss );
          		result = deleteBasePlusCommissionEmployee.executeUpdate(); 
       	} // end try
@@ -70,13 +70,13 @@ public class BasePlusCommissionEmployeeQueries
    		} // end catch
       
       	return result;
-	}
+   }
 
 
 
 
-	public int updateBasePlusCommissionEmployee( String socialSecurityN, double grossS, int commission, double baseS, double bon )
-	{
+   public int updateBasePlusCommissionEmployee( String socialSecurityN, double grossS, int commission, double baseS, double bon )
+   {
       	int result = 0;
       	// set parameters, then execute insertNewPerson
       	try 
@@ -97,13 +97,13 @@ public class BasePlusCommissionEmployeeQueries
       	} // end catch
       
       	return result;
-	}
+   }
 
 
 
 
-   	public List< BasePlusCommissionEmployee > getBasePlusCommissionEmployeeBySS(String ss)
-   	{
+   public List< BasePlusCommissionEmployee > getBasePlusCommissionEmployeeBySS(String ss)
+   {
    		
       	List< BasePlusCommissionEmployee > results = null;
       	ResultSet resultSet = null;
@@ -134,11 +134,11 @@ public class BasePlusCommissionEmployeeQueries
 
       	return results;
 
-   	} // end method 
+   } // end method 
 
 
-   	public List< BasePlusCommissionEmployee > getAllBasePlusCommissionEmployees()
-   	{
+   public List< BasePlusCommissionEmployee > getAllBasePlusCommissionEmployees()
+   {
       	List< BasePlusCommissionEmployee > results = null;
   		ResultSet resultSet = null;
 
@@ -168,22 +168,23 @@ public class BasePlusCommissionEmployeeQueries
          	{
            		resultSet.close();
          	} // end try
-         catch ( SQLException sqlException )
-         {
+        	catch ( SQLException sqlException )
+        	{
           		sqlException.printStackTrace();         
            		close();
-         } // end catch
-      } // end finally
+        	} // end catch
+        
+        } // end finally
       
-      return results;
+        return results;
    } // end method getAllPeople
 
 
 
 
-   	// add an entry
-   	public int addBasePlusCommissionEmployee( String socialSecurityN, double grossS, int commission, double baseS, double bon )
-   	{
+   // add an entry
+   public int addBasePlusCommissionEmployee( String socialSecurityN, double grossS, int commission, double baseS, double bon )
+   {
 
       	int result = 0;
       
@@ -209,9 +210,9 @@ public class BasePlusCommissionEmployeeQueries
 
 
 
-   	// close the database connection
-   	public void close()
-   	{
+   // close the database connection
+   public void close()
+   {
       	try 
       	{
       		connection.close();
@@ -220,7 +221,7 @@ public class BasePlusCommissionEmployeeQueries
       	{
          	sqlException.printStackTrace();
       	} // end catch
-   	} // end method close
+   } // end method close
 
 } // end interface PersonQueries
 
