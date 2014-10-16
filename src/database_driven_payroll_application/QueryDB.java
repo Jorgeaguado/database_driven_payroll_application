@@ -21,39 +21,40 @@ public class QueryDB {
    	
    	public QueryDB(ConnectDB connectDB)
    	{
-   		if(connectDB != null){
+   		if(connectDB != null)
+   		{
    			
-         	try
-         	{
-         	   	Connection connection  = connectDB.getConnection();
+         		try
+         		{
+         	   		Connection connection  = connectDB.getConnection();
         		
-         		tableModel = new ResultSetTableModel( connectDB.getDriver(), connectDB.getDatabaseDriver(), connectDB.getUserName(), connectDB.getPassword(), DEFAULT_QUERY );
+         			tableModel = new ResultSetTableModel( connectDB.getDriver(), connectDB.getDatabaseDriver(), connectDB.getUserName(), connectDB.getPassword(), DEFAULT_QUERY );
          		
-        		increaseBaseSalary10 = connection.prepareStatement( querySql[4] );
+        			increaseBaseSalary10 = connection.prepareStatement( querySql[4] );
 
-        		addBonusCommissionEmployee =  connection.prepareStatement( querySql[5] );
+        			addBonusCommissionEmployee =  connection.prepareStatement( querySql[5] );
 
-        		birthdayBonusSalariedEmployee = connection.prepareStatement( " update salariedEmployees, employees set salariedEmployees.bonus = salariedEmployees.bonus +100  where salariedEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
+        			birthdayBonusSalariedEmployee = connection.prepareStatement( " update salariedEmployees, employees set salariedEmployees.bonus = salariedEmployees.bonus +100  where salariedEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
 
-        		birthdayBonusCommissionEmployee = connection.prepareStatement( " update commissionEmployees, employees set commissionEmployees.bonus = commissionEmployees.bonus +100  where commissionEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
+        			birthdayBonusCommissionEmployee = connection.prepareStatement( " update commissionEmployees, employees set commissionEmployees.bonus = commissionEmployees.bonus +100  where commissionEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
 
-        		birthdayBonusHourlyEmployee = connection.prepareStatement( " update hourlyEmployees, employees set hourlyEmployees.bonus = hourlyEmployees.bonus +100  where hourlyEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
+        			birthdayBonusHourlyEmployee = connection.prepareStatement( " update hourlyEmployees, employees set hourlyEmployees.bonus = hourlyEmployees.bonus +100  where hourlyEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
 
-        		birthdayBonusBasePlusCommissionEmployee = connection.prepareStatement( " update basePlusCommissionEmployees, employees set basePlusCommissionEmployees.bonus = basePlusCommissionEmployees.bonus +100  where basePlusCommissionEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
+        			birthdayBonusBasePlusCommissionEmployee = connection.prepareStatement( " update basePlusCommissionEmployees, employees set basePlusCommissionEmployees.bonus = basePlusCommissionEmployees.bonus +100  where basePlusCommissionEmployees.socialSecurityNumber = employees.socialSecurityNumber and (month(employees.birthday)) = month(now())" );
 
-         	}
-            catch ( ClassNotFoundException classNotFound ) 
-            {
-               JOptionPane.showMessageDialog( null, "Database Driver not found", "Driver not found", JOptionPane.ERROR_MESSAGE );       
-               System.exit( 1 ); // terminate application
-            } // end catch
-            catch ( SQLException sqlException ) 
-            {
-               JOptionPane.showMessageDialog( null, sqlException.getMessage(), "Database error", JOptionPane.ERROR_MESSAGE );
-               // ensure database connection is closed
-               tableModel.disconnectFromDatabase();
-               System.exit( 1 ); // terminate application
-            } // end catch
+         		}
+            		catch ( ClassNotFoundException classNotFound ) 
+            		{
+               			JOptionPane.showMessageDialog( null, "Database Driver not found", "Driver not found", JOptionPane.ERROR_MESSAGE );       
+               			System.exit( 1 ); // terminate application
+            		} // end catch
+            		catch ( SQLException sqlException ) 
+            		{
+               			JOptionPane.showMessageDialog( null, sqlException.getMessage(), "Database error", JOptionPane.ERROR_MESSAGE );
+               			// ensure database connection is closed
+               			tableModel.disconnectFromDatabase();
+               			System.exit( 1 ); // terminate application
+            		} // end catch
 
    		}
    			
