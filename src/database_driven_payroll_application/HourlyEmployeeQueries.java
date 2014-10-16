@@ -21,31 +21,31 @@ public class HourlyEmployeeQueries
    	public HourlyEmployeeQueries(ConnectDB connect)
    	{
 		connection = connect.getConnection();
-      	try 
-      	{
-	         selectAllHourlyEmployees = 
+      		try 
+      		{
+	         	selectAllHourlyEmployees = 
 		            connection.prepareStatement( "SELECT * FROM hourlyEmployees" );
          
-	         selectEmployeeBySS  = 
+	         	selectEmployeeBySS  = 
 		            connection.prepareStatement( "SELECT * FROM hourlyEmployees WHERE socialSecurityNumber = ?" );
 
-	         insertNewHourlyEmployee = connection.prepareStatement( 
+	         	insertNewHourlyEmployee = connection.prepareStatement( 
 		            "INSERT INTO hourlyEmployees " + 
 		            "( socialSecurityNumber, hours, wage, bonus   ) " + 
 		            "VALUES ( ?, ?, ?, ? )" );
 
-	         updateHourlyEmployee =  connection.prepareStatement( 
+	         	updateHourlyEmployee =  connection.prepareStatement( 
 		            "UPDATE hourlyEmployees " + 
 		            "set  hours = ?,"+ " wage = ?, "+" bonus = ? "+" WHERE socialSecurityNumber = ?" );
 
-	         deleteHourlyEmployee = connection.prepareStatement( 
+	         	deleteHourlyEmployee = connection.prepareStatement( 
 	        		 "DELETE FROM hourlyEmployees WHERE socialSecurityNumber = ?" );
-      	} // end try
-      	catch ( SQLException sqlException )
-      	{
-       		sqlException.printStackTrace();
-         	System.exit( 1 );
-      	} // end catch
+      		} // end try
+      		catch ( SQLException sqlException )
+      		{
+       			sqlException.printStackTrace();
+         		System.exit( 1 );
+      		} // end catch
    	} 
  
 
@@ -168,8 +168,8 @@ public class HourlyEmployeeQueries
       	int result = 0;
 
 		try 
-      	{
-				insertNewHourlyEmployee.setString( 1, ss );
+      		{
+			insertNewHourlyEmployee.setString( 1, ss );
        			insertNewHourlyEmployee.setInt( 2, h );
          		insertNewHourlyEmployee.setDouble( 3, w );
          		insertNewHourlyEmployee.setDouble( 4, b );
