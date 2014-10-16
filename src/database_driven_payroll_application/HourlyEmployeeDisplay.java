@@ -93,15 +93,15 @@ public class HourlyEmployeeDisplay extends JFrame
 
 		hoursTextField = new JFormattedTextField(hoursFormat);
 		hoursTextField.setValue(new Integer(amountInt));
-        hoursTextField.setColumns(10);
+        	hoursTextField.setColumns(10);
 
 		wageTextField = new JFormattedTextField(wageFormat);
 		wageTextField.setValue(new Double(amount));
-        wageTextField.setColumns(10);
+        	wageTextField.setColumns(10);
 
 		bonusTextField = new JFormattedTextField(bonusFormat);
 		bonusTextField.setValue(new Double(amount));
-        bonusTextField.setColumns(10);
+        	bonusTextField.setColumns(10);
     }
    	
    	private void addUpdateOptionToPanel(){
@@ -147,7 +147,7 @@ public class HourlyEmployeeDisplay extends JFrame
 
   		queryPanel.setBorder( BorderFactory.createTitledBorder("Find an entry by Social Security Number" ) );
   		queryLabel.setText( "Social Security Number:" );
-      	queryPanel.add( Box.createHorizontalStrut( 5 ) );
+      		queryPanel.add( Box.createHorizontalStrut( 5 ) );
   		queryPanel.add( queryLabel );
   		queryPanel.add( Box.createHorizontalStrut( 10 ) );
   		queryPanel.add( queryTextField );
@@ -431,8 +431,8 @@ public class HourlyEmployeeDisplay extends JFrame
 	{
 		socialSecurityNumberTextField.setText(""  );
 		indexTextField.setText("");
-        nextButton.setEnabled( false );
-       	previousButton.setEnabled( false );
+        	nextButton.setEnabled( false );
+       		previousButton.setEnabled( false );
 		updateButton.setEnabled(false);
 		queryButton.setEnabled(false);
    		socialSecurityNumberTextField.setEditable( true );
@@ -441,11 +441,11 @@ public class HourlyEmployeeDisplay extends JFrame
 
 	private void modView()
 	{
-        nextButton.setEnabled( true );
-        previousButton.setEnabled( true );
+        	nextButton.setEnabled( true );
+        	previousButton.setEnabled( true );
 		updateButton.setEnabled(true);
 		queryButton.setEnabled(true);
-      	socialSecurityNumberTextField.setEditable( false );
+      		socialSecurityNumberTextField.setEditable( false );
 	}
 
 } // end class 
