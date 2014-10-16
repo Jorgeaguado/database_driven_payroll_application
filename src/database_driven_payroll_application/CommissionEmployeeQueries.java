@@ -24,39 +24,39 @@ public class CommissionEmployeeQueries
 	   
 	   try 
 	   {
-         // create query that selects all entries in the AddressBook
-         selectAllCommissionEmployees = 
-         connection.prepareStatement( "SELECT * FROM commissionEmployees" );
+         	// create query that selects all entries in the AddressBook
+         	selectAllCommissionEmployees = 
+         	connection.prepareStatement( "SELECT * FROM commissionEmployees" );
          
-         selectEmployeeBySS  = 
-            connection.prepareStatement( "SELECT * FROM commissionEmployees WHERE socialSecurityNumber = ?" );
-         // create insert that adds a new entry into the database
-         insertNewCommissionEmployee = connection.prepareStatement( 
-            "INSERT INTO commissionEmployees " + 
-            "( socialSecurityNumber, grossSales, commissionRate, bonus  ) " + 
-            "VALUES ( ?, ?, ?, ? )" );
+         	selectEmployeeBySS  = 
+            		connection.prepareStatement( "SELECT * FROM commissionEmployees WHERE socialSecurityNumber = ?" );
+         	// create insert that adds a new entry into the database
+         	insertNewCommissionEmployee = connection.prepareStatement( 
+            		"INSERT INTO commissionEmployees " + 
+            		"( socialSecurityNumber, grossSales, commissionRate, bonus  ) " + 
+            		"VALUES ( ?, ?, ?, ? )" );
 
-         updateCommissionEmployee =  connection.prepareStatement( 
-            "UPDATE commissionEmployees " + 
-            "set  grossSales = ?,"+ " commissionRate = ?, "+" bonus = ? "+" WHERE socialSecurityNumber = ?" );
+         	updateCommissionEmployee =  connection.prepareStatement( 
+            		"UPDATE commissionEmployees " + 
+            		"set  grossSales = ?,"+ " commissionRate = ?, "+" bonus = ? "+" WHERE socialSecurityNumber = ?" );
 
-         deleteCommissionEmployee = connection.prepareStatement( 
-            "DELETE FROM commissionEmployees WHERE socialSecurityNumber = ?" );
+         	deleteCommissionEmployee = connection.prepareStatement( 
+            		"DELETE FROM commissionEmployees WHERE socialSecurityNumber = ?" );
 	   } // end try
 	   catch ( SQLException sqlException )
 	   {
-         sqlException.printStackTrace();
-         System.exit( 1 );
+         	sqlException.printStackTrace();
+         	System.exit( 1 );
 	   } // end catch
 
    } // end PersonQueries constructor
  
 
-	public int deleteCommissionEmployee(String ss)
-	{
+   public int deleteCommissionEmployee(String ss)
+   {
      	int result = 0;
 
-  		// set parameters, then execute insertNewPerson
+  	// set parameters, then execute insertNewPerson
       	try 
       	{
       		deleteCommissionEmployee.setString( 1, ss );
@@ -70,117 +70,116 @@ public class CommissionEmployeeQueries
       	} // end catch
       
       	return result;
-	}
+   }
 
 
-	public int updateCommissionEmployee(String ss, double grossS,int rate, double bonus)
-	{
-      		int result = 0;
+   public int updateCommissionEmployee(String ss, double grossS,int rate, double bonus)
+   {
+      	int result = 0;
 
-      		// set parameters, then execute update
-      		try 
-      		{
-         		updateCommissionEmployee.setDouble( 1, grossS );
-         		updateCommissionEmployee.setInt( 2, rate );
-         		updateCommissionEmployee.setDouble( 3, bonus );
-         		updateCommissionEmployee.setString( 4, ss );
+      	// set parameters, then execute update
+      	try 
+      	{
+      		updateCommissionEmployee.setDouble( 1, grossS );
+      		updateCommissionEmployee.setInt( 2, rate );
+      		updateCommissionEmployee.setDouble( 3, bonus );
+       		updateCommissionEmployee.setString( 4, ss );
 
-         		result = updateCommissionEmployee.executeUpdate(); 
-      		} // end try
-      		catch ( SQLException sqlException )
-      		{
-         		sqlException.printStackTrace();
-         		close();
-      		} // end catch
+       		result = updateCommissionEmployee.executeUpdate(); 
+      	} // end try
+      	catch ( SQLException sqlException )
+      	{
+     		sqlException.printStackTrace();
+       		close();
+      	} // end catch
       
-      		return result;
+      	return result;
 
-	}
+   }
 
 
-   	// select all of the addresses in the database
-   	public List< CommissionEmployee > getCommissionEmployeeBySS(String ss)
-   	{
-      		List< CommissionEmployee > results = null;
-      		ResultSet resultSet = null;
+   // select all of the addresses in the database
+   public List< CommissionEmployee > getCommissionEmployeeBySS(String ss)
+   {
+      	List< CommissionEmployee > results = null;
+      	ResultSet resultSet = null;
 
-      		// set parameters, then execute insertNewPerson
-      		try 
-      		{
-         		selectEmployeeBySS.setString( 1, ss );
+      	// set parameters, then execute insertNewPerson
+      	try 
+      	{
+     		selectEmployeeBySS.setString( 1, ss );
 
-         		resultSet = selectEmployeeBySS.executeQuery(); 
-         		results = new ArrayList< CommissionEmployee >();
+       		resultSet = selectEmployeeBySS.executeQuery(); 
+       		results = new ArrayList< CommissionEmployee >();
          
-         		while ( resultSet.next() )
-         		{
-            			results.add( new CommissionEmployee(
-               			resultSet.getString( "socialSecurityNumber" ),
-               			resultSet.getDouble( "grossSales" ),
-               			resultSet.getInt( "commissionRate" ),
-               			resultSet.getDouble( "bonus" ) 
-            					) 
-            			);
-         		} // end w
+       		while ( resultSet.next() )
+       		{
+       			results.add( new CommissionEmployee(
+       			resultSet.getString( "socialSecurityNumber" ),
+      			resultSet.getDouble( "grossSales" ),
+               		resultSet.getInt( "commissionRate" ),
+               		resultSet.getDouble( "bonus" ) 
+            			) 
+            		);
+         	} // end w
 
-      		} // end try
-      		catch ( SQLException sqlException )
-      		{
-         		sqlException.printStackTrace();
-         		close();
-      		} // end catch
+      	} // end try
+      	catch ( SQLException sqlException )
+      	{
+      		sqlException.printStackTrace();
+      		close();
+      	} // end catch
       
-      		return results;
+      	return results;
 
-   	} // end method 
-
-
+   } // end method 
 
 
-   	public List< CommissionEmployee > getAllCommissionEmployees()
-   	{
-      		List< CommissionEmployee > results = null;
-      		ResultSet resultSet = null;
-      		try 
-      		{
-         		resultSet = selectAllCommissionEmployees.executeQuery(); 
-         		results = new ArrayList< CommissionEmployee >();
+
+
+   public List< CommissionEmployee > getAllCommissionEmployees()
+   {
+      	List< CommissionEmployee > results = null;
+      	ResultSet resultSet = null;
+      	try 
+      	{
+      		resultSet = selectAllCommissionEmployees.executeQuery(); 
+       		results = new ArrayList< CommissionEmployee >();
          
-         		while ( resultSet.next() )
-         		{
-           			results.add( new CommissionEmployee(
+       		while ( resultSet.next() )
+       		{
+      			results.add( new CommissionEmployee(
                		resultSet.getString( "socialSecurityNumber" ),
                		resultSet.getDouble( "grossSales" ),
-     				resultSet.getInt( "commissionRate" ),
-        			resultSet.getDouble( "bonus" ) 	) );
-         		} // end while
-      		} // end try
-      		catch ( SQLException sqlException )
-      		{
-         		sqlException.printStackTrace();         
-      		} // end catch
-      		finally
-      		{
-         		try 
-         		{
+     			resultSet.getInt( "commissionRate" ),
+       			resultSet.getDouble( "bonus" ) 	) );
+       		} // end while
+      	} // end try
+      	catch ( SQLException sqlException )
+      	{
+       		sqlException.printStackTrace();         
+      	} // end catch
+      	finally
+      	{
+       		try 
+         	{
             		resultSet.close();
-         		} // end try
-         		catch ( SQLException sqlException )
-         		{
+         	} // end try
+         	catch ( SQLException sqlException )
+         	{
             		sqlException.printStackTrace();         
             		close();
-         		} // end catch
-      		} // end finally
+         	} // end catch
+      	} // end finally
       
-      		return results;
-   	} // end method getAllPeople
+      	return results;
+   } // end method getAllPeople
 
 
 
    	// add an entry
-   	public int addCommissionEmployee(String ss, double grossS, int rate, double bonus)
-   	{
-
+   public int addCommissionEmployee(String ss, double grossS, int rate, double bonus)
+   {
       	int result = 0;
       	// set parameters, then execute insertNewPerson
       	try 
@@ -200,11 +199,11 @@ public class CommissionEmployeeQueries
       	} // end catch
       
       	return result;
-   	} // end method addPerson
+   } // end method addPerson
 
    	// close the database connection
-   	public void close()
-   	{
+   public void close()
+   {
       	try 
       	{
          	connection.close();
@@ -213,7 +212,7 @@ public class CommissionEmployeeQueries
       	{
        		sqlException.printStackTrace();
       	} // end catch
-   	} // end method close
+   } // end method close
 
 } // end interface PersonQueries
 
