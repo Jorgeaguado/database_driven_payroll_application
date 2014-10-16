@@ -49,14 +49,14 @@ public class CommissionEmployeeQueries
          	System.exit( 1 );
 	   } // end catch
 
-   } // end PersonQueries constructor
+   } // end CommissionEmployeeQueries constructor
  
 
    public int deleteCommissionEmployee(String ss)
    {
      	int result = 0;
 
-  	// set parameters, then execute insertNewPerson
+  	// set parameters, then execute 
       	try 
       	{
       		deleteCommissionEmployee.setString( 1, ss );
@@ -177,7 +177,7 @@ public class CommissionEmployeeQueries
 
 
 
-   	// add an entry
+   // add an entry
    public int addCommissionEmployee(String ss, double grossS, int rate, double bonus)
    {
       	int result = 0;
