@@ -13,10 +13,10 @@ public class CommissionEmployee
    public CommissionEmployee( String socialSecurityN, double grossS, int commission, double bon )
    {
 
-      	setSocialSecurityNumber( socialSecurityN );
-      	setGrossSales(grossS);
-      	setCommission(commission);
-      	setBonus(bon);
+      setSocialSecurityNumber( socialSecurityN );
+      setGrossSales(grossS);
+      setCommission(commission);
+      setBonus(bon);
 
    } // end five-argument Person constructor 
 
