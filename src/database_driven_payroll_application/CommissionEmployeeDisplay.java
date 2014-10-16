@@ -60,43 +60,45 @@ public class CommissionEmployeeDisplay extends JFrame
    	// no-argument constructor
    	public CommissionEmployeeDisplay(ConnectDB connect)
    	{
-      	super( "Commission Employee" ); 
+      		super( "Commission Employee" ); 
 		commissionEmployeeQueries = new CommissionEmployeeQueries(connect);
 		
 		initTextFields();
 
-     	setLayout( new FlowLayout( FlowLayout.CENTER, 10, 10 ) );
-      	setSize( 500, 600 );
-      	setResizable( false );
+     		setLayout( new FlowLayout( FlowLayout.CENTER, 10, 10 ) );
+      		setSize( 500, 600 );
+      		setResizable( false );
       		
-      	addNavegationToPanel();
-      	addFieldsToPanel();
-      	addFindOptionToPanel();
-      	addBrowsOptionToPanel();
-      	addUpdateOptionToPanel();
+      		addNavegationToPanel();
+      		addFieldsToPanel();
+      		addFindOptionToPanel();
+      		addBrowsOptionToPanel();
+      		addUpdateOptionToPanel();
       		
-      	setVisible( true );
+      		setVisible( true );
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		browseButtonActionPerformed(  );
 
    	} // end no-argument constructor
    	
-   	private void initTextFields(){
+   	private void initTextFields()
+   	{
 
 		grossSalesTextField = new JFormattedTextField(grossSalesFormat);
 		grossSalesTextField.setValue(new Double(amount));
-        grossSalesTextField.setColumns(10);
+        	grossSalesTextField.setColumns(10);
 
 		bonusTextField = new JFormattedTextField(bonusFormat);
 		bonusTextField.setValue(new Double(amount));
-        bonusTextField.setColumns(10);
+        	bonusTextField.setColumns(10);
 
 		commissionRateTextField = new JFormattedTextField(commissionRateFormat);
 		commissionRateTextField.setValue(new Integer(amountInt));
-        commissionRateTextField.setColumns(10);
+        	commissionRateTextField.setColumns(10);
    	}
    	
-   	private void addUpdateOptionToPanel(){
+   	private void addUpdateOptionToPanel()
+   	{
 
   		updateButton.setText( "Update Entry" );
 
@@ -115,7 +117,8 @@ public class CommissionEmployeeDisplay extends JFrame
 
    	}
    	
-    private void addBrowsOptionToPanel(){
+    	private void addBrowsOptionToPanel()
+    	{
 
   		browseButton.setText( "Browse All Entries" );
 
@@ -132,7 +135,8 @@ public class CommissionEmployeeDisplay extends JFrame
   		add( browseButton );
     }
    	
-    private void addFindOptionToPanel(){
+    private void addFindOptionToPanel()
+    {
 
   		queryPanel.setLayout( new BoxLayout( queryPanel, BoxLayout.X_AXIS) );
 
@@ -150,11 +154,11 @@ public class CommissionEmployeeDisplay extends JFrame
   		queryButton.addActionListener(
      		new ActionListener()
      		{
-        			public void actionPerformed( ActionEvent evt )
+        		public void actionPerformed( ActionEvent evt )
         		{
            		queryButtonActionPerformed( evt );
         		} // end method actionPerformed
-     	} // end anonymous inner class
+     		} // end anonymous inner class
   		); // end call to addActionListener
 
 
@@ -163,7 +167,8 @@ public class CommissionEmployeeDisplay extends JFrame
   		add( queryPanel );
     }
    	
-    private void addFieldsToPanel(){
+    private void addFieldsToPanel()
+    {
 
   		displayPanel.setLayout( new GridLayout( 4, 2, 4, 4 ) );
 
@@ -188,7 +193,8 @@ public class CommissionEmployeeDisplay extends JFrame
   		add( displayPanel );
     }
 
-   	private void addNavegationToPanel(){
+   private void addNavegationToPanel()
+   {
 
   		navigatePanel.setLayout(
      		new BoxLayout( navigatePanel, BoxLayout.X_AXIS ) );
@@ -197,10 +203,10 @@ public class CommissionEmployeeDisplay extends JFrame
   				previousButton.addActionListener(
      			new ActionListener()
      			{
-        				public void actionPerformed( ActionEvent evt )
-        				{
-           					previousButtonActionPerformed( evt );
-        				} // end method actionPerformed
+       				public void actionPerformed( ActionEvent evt )
+       				{
+          				previousButtonActionPerformed( evt );
+       				} // end method actionPerformed
      			} // end anonymous inner class
   		); // end call to addActionListener
 
@@ -228,8 +234,7 @@ public class CommissionEmployeeDisplay extends JFrame
   		navigatePanel.add( ofLabel );
   		navigatePanel.add( Box.createHorizontalStrut( 10 ) );
 
-  		maxTextField.setHorizontalAlignment(
-     	JTextField.CENTER );
+  		maxTextField.setHorizontalAlignment(JTextField.CENTER );
   		maxTextField.setEditable( false );
   		navigatePanel.add( maxTextField );
   		navigatePanel.add( Box.createHorizontalStrut( 10 ) );
@@ -257,8 +262,7 @@ public class CommissionEmployeeDisplay extends JFrame
    	{
 		int result = commissionEmployeeQueries.updateCommissionEmployee( socialSecurityNumberTextField.getText(),  Double.parseDouble(grossSalesTextField.getText()), Integer.parseInt(commissionRateTextField.getText()),  Double.parseDouble(bonusTextField.getText()) );
 
-
-      		if ( result == 1 )
+	      		if ( result == 1 )
       			JOptionPane.showMessageDialog( this, "CommissionEmployee updated!", "Employee updated", JOptionPane.PLAIN_MESSAGE );
       		else
       			JOptionPane.showMessageDialog( this, "CommissionEmployee not updated!", "Error", JOptionPane.PLAIN_MESSAGE );
@@ -300,7 +304,7 @@ public class CommissionEmployeeDisplay extends JFrame
    	private void queryButtonActionPerformed( ActionEvent evt )
    	{
 		boolean found = false;
-       	int auxEntryIndex = 0;
+       		int auxEntryIndex = 0;
    		numberOfEntries = commissionResults.size();
 
 		for(auxEntryIndex = 0; auxEntryIndex < numberOfEntries; auxEntryIndex++)
@@ -310,15 +314,16 @@ public class CommissionEmployeeDisplay extends JFrame
 			{
 				currentEntryIndex = auxEntryIndex;
 				found = false;
-        	 	socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
+        		 	socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
 				grossSalesTextField.setValue(currentEntry.getGrossSales());
 				commissionRateTextField.setValue(currentEntry.getCommission());
 				bonusTextField.setValue(currentEntry.getBonus());
 				
-        	 	indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
+        	 		indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
 				break;
 			}
 		}
+		
 		if(found)
 			JOptionPane.showMessageDialog( this, "Security Social not found!", "Error", JOptionPane.PLAIN_MESSAGE );
 
@@ -333,7 +338,6 @@ public class CommissionEmployeeDisplay extends JFrame
       
       		if ( numberOfEntries != 0 && currentEntryIndex < numberOfEntries )
       		{
-
         		currentEntry = commissionResults.get( currentEntryIndex );
          		socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
          		grossSalesTextField.setValue(currentEntry.getGrossSales());
@@ -360,18 +364,16 @@ public class CommissionEmployeeDisplay extends JFrame
   
          		if ( numberOfEntries != 0 )
          		{
-            		currentEntry = commissionResults.get( currentEntryIndex );
-
+            			currentEntry = commissionResults.get( currentEntryIndex );
          			socialSecurityNumberTextField.setText("" + currentEntry.getSocialSecurityNumber() );
          			grossSalesTextField.setValue(currentEntry.getGrossSales());
          			commissionRateTextField.setValue(currentEntry.getCommission());
          			bonusTextField.setValue(currentEntry.getBonus());
 
            			maxTextField.setText( "" + numberOfEntries );
-            		indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
-            		nextButton.setEnabled( true );
-            		previousButton.setEnabled( true );
-
+            			indexTextField.setText( "" + ( currentEntryIndex + 1 ) );
+            			nextButton.setEnabled( true );
+            			previousButton.setEnabled( true );
          		} // end if
 
       		} // end try
@@ -421,22 +423,22 @@ public class CommissionEmployeeDisplay extends JFrame
 	{
 		socialSecurityNumberTextField.setText(""  );
 		indexTextField.setText("");
-        nextButton.setEnabled( false );
-        previousButton.setEnabled( false );
+        	nextButton.setEnabled( false );
+        	previousButton.setEnabled( false );
 		updateButton.setEnabled(false);
 		queryButton.setEnabled(false);
-      	socialSecurityNumberTextField.setEditable( true );
+      		socialSecurityNumberTextField.setEditable( true );
 
 	}
 
 
 	private void modView()
 	{
-        nextButton.setEnabled( true );
-        previousButton.setEnabled( true );
+        	nextButton.setEnabled( true );
+        	previousButton.setEnabled( true );
 		updateButton.setEnabled(true);
 		queryButton.setEnabled(true);
-      	socialSecurityNumberTextField.setEditable( false );
+      		socialSecurityNumberTextField.setEditable( false );
 	}
 
 
