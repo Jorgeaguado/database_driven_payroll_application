@@ -26,20 +26,20 @@ public class Employee
       setEmployeeType( type );
       setDepartmentName( departmentN );
 
-   } // end five-argument Person constructor 
+   } // end five-argument Employee 
 
 
-   // sets the addressID
+   // sets the setSocialSecurityNumber
    public void setSocialSecurityNumber( String socialSecurityN )
    {
       socialSecurityNumber = socialSecurityN;
-   } // end method setAddressID
+   } // end method setSocialSecurityNumber
 
-   // returns the addressID 
+   // returns the getSocialSecurityNumber 
    public String getSocialSecurityNumber()
    {
       return socialSecurityNumber;
-   } // end method getAddressID
+   } // end method getSocialSecurityNumber
    
    // sets the firstName
    public void setFirstName( String firstN )
@@ -59,13 +59,13 @@ public class Employee
       lastName = lastN;
    } // end method setLastName
 
-   // returns the first name 
+   // returns the last name 
    public String getLastName()
    {
       return lastName;
    } // end method getLastName
    
-   // sets the email address
+   // sets the Birthday
    public void setBirthday( Date birth )
    {
       birthday = birth;
@@ -77,31 +77,31 @@ public class Employee
       return birthday;
    } // end method getEmail
    
-   // sets the phone number
+   // sets the Employee type
    public void setEmployeeType( String type )
    {
       employeeType = type;
-   } // end method setPhoneNumber
+   } // end method setEmployeeType
 
-   // returns the email address
+   // returns the email type
    public String getEmployeeType()
    {
       return employeeType;
-   } // end method getPhoneNumber
+   } // end method getEmployeeType
 
    public void setDepartmentName( String departmentN )
 
    {
       departmentName = departmentN;
-   } // end method setPhoneNumber
+   } // end method setDepartmentName
 
 
-   // returns the email address
+   // returns the department
    public String getDepartmentName()
    {
 
       return departmentName;
-   } // end method getPhoneNumber
+   } // end method getDepartmentName
 
-} // end class Person
+} // end class Employee
 
